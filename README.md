@@ -29,7 +29,6 @@ execute method that takes a VirtualMachine object.
 a. This bytecode class prepares for a function call by creating a new frame and passing
 the instance variable derived from the tokenstream. The init method simply sets the
 instance variable string equal to the bytecode name.
-Page 5
 3. BopCode
 a. This class is the longest class out of all the bytecode files; however, this is only
 because there are multiple operators that require different behavior. The way I went
