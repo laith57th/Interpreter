@@ -9,7 +9,7 @@ Using the terminal, I used the following commands on the project files:
 > javac interpreter/Interpreter.java
 > java interpreter.Interpreter <bytecode file>
 The program ran as expected and no error messages were displayed
-Assumptions
+# Assumptions
 Assumed a correct bytecode file will be passed to the interpreter class during execution.
 Summary of technical work
 To complete this project I implemented a strategy design pattern to dynamically choose the
