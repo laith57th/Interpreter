@@ -6,19 +6,21 @@ OpenJDK 64-Bit Server VM Temurin-17.0.2+8 (build 17.0.2+8, mixed mode)
 # Compilation Result
 Using the terminal, I used the following commands on the project files:
 > javac interpreter/bytecode/*.java
+
 > javac interpreter/Interpreter.java
+
 > java interpreter.Interpreter <bytecode file>
 The program ran as expected and no error messages were displayed
 # Assumptions
 Assumed a correct bytecode file will be passed to the interpreter class during execution.
-Summary of technical work
+# Summary of technical work
 To complete this project I implemented a strategy design pattern to dynamically choose the
 behavior executed for each scanned bytecode from the token stream. Using object oriented
 programming, I passed the information of the bytecode classes to the interpreter while keeping
 all instance variables private to each respective class. I also used single function methods in
 each bytecode class and the corresponding classes, especially the RunTimeStack class.
-Implementation
-ByteCode subclasses
+# Implementation
+## ByteCode subclasses
 1. ByteCode
 a. This is the abstract superclass that is parent to all the bytecode subclasses. This
 class initializes the init method that takes an arraylist of string parameters and an
@@ -81,7 +83,6 @@ a. This class reads a new value from the user and pushes it on top of the runTim
 stack.
 15. ReturnCode
 a. This class’s init method checks if there’s functionName present after the return
-Page 6
 keyword and sets functionName to null otherwise. The execute method for this class
 simply prints the dump output if dump is on.
 16. StoreCode
@@ -94,14 +95,14 @@ CodeTable class
 This class was simple to implement. I started by creating a HashMap to store the bytecodes, then I
 created a getClass method to retrieve the bytecode instance from the hashmap using the passed
 string parameter.
-ByteCodeLoader class
+# ByteCodeLoader class
 This class was similar to the lexer class I implemented in an earlier assignment. To implement the
 loadCodes method, I created a new program object and iterated through the bytecode file adding
 each bytecode to the program object. One thing I struggled with was using the forName method to
 create a new instance of each bytecode. My IDE kept suggesting that the newInstance method had
 been deprecated. After some research, I found that I need to use the getDeclaredConstructor() to
 retrieve the respective constructor of each bytecode.
-Program class
+# Program class
 I started implementing this class by creating a Vector of bytecode objects and HashMap to hold
 the symbolic addresses used in the resolveAddresses method. The program class contains three
 methods: addCode, getCode, and resolveAddresses. The addCode method takes a byteCode
@@ -111,7 +112,7 @@ from the program vector. Finally resolveAddresses creates a temporary integer ju
 iterates through the program vector, checks if the bytecode is either a CALL, FALSEBRANCH, or
 GOTO, and sets the new target address by using a BranchCode object. Overall this class wasn’t
 too difficult to implement, the trickiest part was probably the resolveAddresses function.
-RunTimeStack class
+# RunTimeStack class
 This was probably the longest class to implement out of all the classes in the project. However, most
 of the functions were straightforward (getters and setters). The most complex method to implement
 for me was the dump method. To implement this method, I decided to create a new instance
@@ -119,7 +120,7 @@ variable “frameIndex” that simply tracks the index of the vector that a new 
 this to find the end of the runTime stack and the beginning of the temporary framePointer stack if
 applicable. In order not to modify the runTime stack, I used a temporary arrayList to hold the frame
 stack and print the contents after the for loop.
-Code Organization
+# Code Organization
 For better organization, all bytecode class files are inside the subpackage bytecode, inside the
 package interpreter. Also, all instance variables are private to each class and can be accessed
 through getter methods.
